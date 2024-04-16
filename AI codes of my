@@ -1,0 +1,31 @@
+import nltk
+from nltk.chat.util import Chat, reflections
+
+class JarvisAI:
+    def __init__(self):
+        self.patterns = [
+            (r'hi|hello|hey', ['Hello!', 'Hi there!', 'Hey!']),
+            (r'how are you?', ['I am doing well, thank you!', 'I\'m fine, how about you?']),
+            (r'(.*) your name?', ['My name is Jarvis.']),
+            (r'(.*) help (.*) project', ['Sure! What kind of project do you need help with?']),
+            (r'what can you do\?', ['I can assist you with various tasks such as project management, technical assistance, and more. Just ask!']),
+            (r'thanks|thank you', ['You\'re welcome!', 'Anytime!']),
+            (r'quit', ['Goodbye!', 'Bye!', 'See you later.']),
+        ]
+        self.chatbot = Chat(self.patterns, reflections)
+    
+    def respond(self, user_input):
+        return self.chatbot.respond(user_input)
+
+def main():
+    jarvis = JarvisAI()
+    print("Welcome! How can I assist you today?")
+    while True:
+        user_input = input("You: ")
+        response = jarvis.respond(user_input)
+        print("Jarvis:", response)
+        if user_input.lower() == 'quit':
+            break
+
+if __name__ == "__main__":
+    main()
